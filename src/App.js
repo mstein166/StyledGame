@@ -3,35 +3,83 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Sword, Target, Zap, ArrowLeft } from 'lucide-react'
+import Confetti from 'react-confetti'
+
+const acronyms = {
+  Easy: [
+    { acronym: 'LOL', words: ['Laugh', 'Out', 'Loud'] },
+    { acronym: 'BRB', words: ['Be', 'Right', 'Back'] },
+    { acronym: 'TBH', words: ['To', 'Be', 'Honest'] },
+    { acronym: 'IDK', words: ['I', "Don't", 'Know'] },
+    { acronym: 'OMG', words: ['Oh', 'My', 'God'] },
+    { acronym: 'ROFL', words: ['Rolling', 'On', 'The', 'Floor', 'Laughing'] },
+    { acronym: 'PTSD', words: ['Post', 'Traumatic', 'Stress', 'Disorder'] }
+  ],
+  Medium: [
+    { acronym: 'ASAP', words: ['As', 'Soon', 'As', 'Possible'] },
+    { acronym: 'FOMO', words: ['Fear', 'Of', 'Missing', 'Out'] },
+    { acronym: 'YOLO', words: ['You', 'Only', 'Live', 'Once'] },
+    { acronym: 'IMHO', words: ['In', 'My', 'Humble', 'Opinion'] }
+  ],
+  Hard: [
+    { acronym: 'POTUS', words: ['President', 'Of', 'The', 'United', 'States'] },
+    { acronym: 'NASA', words: ['National', 'Aeronautics', 'and', 'Space', 'Administration'] },
+    { acronym: 'SCOTUS', words: ['Supreme', 'Court', 'Of', 'The', 'United', 'States'] },
+    { acronym: 'UNESCO', words: ['United', 'Nations', 'Educational', 'Scientific', 'and', 'Cultural', 'Organization'] },
+    { acronym: 'INTERPOL', words: ['International', 'Criminal', 'Police', 'Organization'] },
+    { acronym: 'IDE', words: ['Integrated', 'Development', 'Environment'] },
+    { acronym: 'JSON', words: ['JavaScript', 'Object', 'Notation'] }
+  ]
+}
 
 export default function AcronynjaNinja() {
   const [gameStarted, setGameStarted] = useState(false)
   const [difficulty, setDifficulty] = useState(null)
   const [guessesLeft, setGuessesLeft] = useState(5)
-  const [currentAcronym, setCurrentAcronym] = useState('LOL')
-  const [guess, setGuess] = useState(['', '', ''])
+  const [currentAcronymObj, setCurrentAcronymObj] = useState(null) 
+  const [currentAcronym, setCurrentAcronym] = useState('')
+  const [guess, setGuess] = useState([])
+  const [showConfetti, setShowConfetti] = useState(false)
+
 
   const startGame = (selectedDifficulty) => {
     setDifficulty(selectedDifficulty)
+    const randomAcronymObj = acronyms[selectedDifficulty][Math.floor(Math.random() * acronyms[selectedDifficulty].length)]
+    setCurrentAcronymObj(randomAcronymObj)
+    setGuess(Array(randomAcronymObj.words.length).fill(''))
     setGameStarted(true)
   }
 
   const goBack = () => {
     setGameStarted(false)
     setGuessesLeft(5)
-    setGuess(['', '', ''])
+    setShowConfetti(false)
+    setGuess([])
+    setCurrentAcronymObj(null)
   }
 
   const submitGuess = () => {
-    setGuessesLeft(guessesLeft - 1)
+    const isCorrect = guess.every((word, index) => 
+      word.toLowerCase() === currentAcronymObj.words[index].toLowerCase()
+    )
+    if (isCorrect) {
+      setShowConfetti(true)
+      // Handle win condition
+    } else {
+      setGuessesLeft(guessesLeft - 1)
+      if (guessesLeft === 1) {
+        // Handle lose condition
+      }
+    }
   }
+
 
   const getHint = () => {
     // Implement hint logic here
   }
 
   const showAnswer = () => {
-    // Implement show answer logic here
+   setGuess(currentAcronymObj.words)
   }
 
   return (
@@ -47,7 +95,7 @@ export default function AcronynjaNinja() {
         ) : (
           <GameScreen
             guessesLeft={guessesLeft}
-            currentAcronym={currentAcronym}
+            currentAcronymObj={currentAcronymObj}
             guess={guess}
             setGuess={setGuess}
             submitGuess={submitGuess}
@@ -57,6 +105,7 @@ export default function AcronynjaNinja() {
           />
         )}
       </motion.div>
+      {showConfetti && <Confetti />}
     </div>
   )
 }
@@ -103,7 +152,7 @@ function StartScreen({ startGame }) {
 
 function GameScreen({
   guessesLeft,
-  currentAcronym,
+  currentAcronymObj,
   guess,
   setGuess,
   submitGuess,
@@ -129,12 +178,12 @@ function GameScreen({
         Guesses left: <span className="text-purple-600">{guessesLeft}</span>
       </p>
       <p className="text-2xl font-bold text-gray-800 mb-6">
-        The acronym is: <span className="text-purple-600">{currentAcronym}</span>
+        The acronym is: <span className="text-purple-600">{currentAcronymObj.acronym}</span>
       </p>
       <div className="space-y-4 mb-6">
-        {currentAcronym.split('').map((letter, index) => (
+      {currentAcronymObj.words.map((word, index) => (
           <div key={index} className="flex items-center justify-center space-x-2">
-            <span className="text-xl font-semibold text-purple-600">{letter} =</span>
+            <span className="text-xl font-semibold text-purple-600">{currentAcronymObj.acronym[index]} =</span>
             <input
               type="text"
               value={guess[index]}
@@ -178,3 +227,4 @@ function GameScreen({
     </div>
   )
 }
+
