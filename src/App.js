@@ -8,18 +8,34 @@ import Confetti from 'react-confetti'
 const acronyms = {
   Easy: [
     { acronym: 'LOL', words: ['Laugh', 'Out', 'Loud'] },
+    { acronym: 'ASAP', words: ['As', 'Soon', 'As', 'Possible'] },
     { acronym: 'BRB', words: ['Be', 'Right', 'Back'] },
     { acronym: 'TBH', words: ['To', 'Be', 'Honest'] },
+    { acronym: 'WHO', words: ['World', 'Health', 'Organization'] },
     { acronym: 'IDK', words: ['I', "Don't", 'Know'] },
     { acronym: 'OMG', words: ['Oh', 'My', 'God'] },
+    { acronym: 'SQL', words: ['Structured', 'Query', 'Language'] },
+    { acronym: 'VOIP', words: ['Voice', 'Over', 'Internet', 'Protocol'] },
+    { acronym: 'OCR', words: ['Optical', 'Character', 'Recognition'] },
     { acronym: 'ROFL', words: ['Rolling', 'On', 'The', 'Floor', 'Laughing'] },
     { acronym: 'PTSD', words: ['Post', 'Traumatic', 'Stress', 'Disorder'] }
   ],
   Medium: [
-    { acronym: 'ASAP', words: ['As', 'Soon', 'As', 'Possible'] },
+    { acronym: 'WYSIWYG', words: ['What', 'You', 'See', 'Is', 'What', 'You', 'Get'] },
+    { acronym: 'RAM', words: ['Random', 'Access', 'Memory'] },
+    { acronym: 'KISS', words: ['Keep', 'It', 'Simple', 'Stupid'] },
+    { acronym: 'CRUD', words: ['Create', 'Read', 'Update', 'Delete'] },
+    { acronym: 'PDF', words: ['Portable', 'Document', 'Format'] },
     { acronym: 'FOMO', words: ['Fear', 'Of', 'Missing', 'Out'] },
+    { acronym: 'SOAP', words: ['Simple', 'Object', 'Access', 'Protocol'] },
     { acronym: 'YOLO', words: ['You', 'Only', 'Live', 'Once'] },
-    { acronym: 'IMHO', words: ['In', 'My', 'Humble', 'Opinion'] }
+    { acronym: 'API', words: ['Application', 'Programming', 'Interface'] },
+    { acronym: 'GUI', words: ['Graphical', 'User', 'Interface'] },
+    { acronym: 'IMHO', words: ['In', 'My', 'Humble', 'Opinion'] },
+    { acronym: 'MADD', words: ['Mothers', 'Against', 'Drunk', 'Driving'] },
+    { acronym: 'ESA', words: ['European', 'Space', 'Agency'] },
+    { acronym: 'CSS', words: ['Cascading', 'Style', 'Sheets'] },
+    { acronym: 'DNS', words: ['Domain', 'Name', 'System'] }
   ],
   Hard: [
     { acronym: 'POTUS', words: ['President', 'Of', 'The', 'United', 'States'] },
@@ -27,8 +43,13 @@ const acronyms = {
     { acronym: 'SCOTUS', words: ['Supreme', 'Court', 'Of', 'The', 'United', 'States'] },
     { acronym: 'UNESCO', words: ['United', 'Nations', 'Educational', 'Scientific', 'and', 'Cultural', 'Organization'] },
     { acronym: 'INTERPOL', words: ['International', 'Criminal', 'Police', 'Organization'] },
+    { acronym: 'USB', words: ['Universal', 'Serial', 'Bus'] },
+    { acronym: 'MIDI', words: ['Musical', 'Instrument', 'Digital', 'Interface'] },
+    { acronym: 'DARPA', words: ['Defense', 'Advanced', 'Research', 'Projects', 'Agency'] },
+    { acronym: 'BIOS', words: ['Basic', 'Input', 'Output', 'System'] },
     { acronym: 'IDE', words: ['Integrated', 'Development', 'Environment'] },
-    { acronym: 'JSON', words: ['JavaScript', 'Object', 'Notation'] }
+    { acronym: 'JPEG', words: ['Joint', 'Photographic', 'Experts', 'Group'] },
+    { acronym: 'LED', words: ['Light', 'Emitting', 'Diode'] }
   ]
 }
 
