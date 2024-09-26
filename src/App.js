@@ -58,9 +58,12 @@ export default function AcronynjaNinja() {
   const [difficulty, setDifficulty] = useState(null)
   const [guessesLeft, setGuessesLeft] = useState(5)
   const [currentAcronymObj, setCurrentAcronymObj] = useState(null) 
-  const [currentAcronym, setCurrentAcronym] = useState('')
+  //const [currentAcronym, setCurrentAcronym] = useState('')
   const [guess, setGuess] = useState([])
   const [showConfetti, setShowConfetti] = useState(false)
+  //testing game over
+  const [gameOver, setGameOver] = useState(false)
+  const [gameWon, setGameWon] = useState(false)
 
 
   const startGame = (selectedDifficulty) => {
@@ -69,6 +72,9 @@ export default function AcronynjaNinja() {
     setCurrentAcronymObj(randomAcronymObj)
     setGuess(Array(randomAcronymObj.words.length).fill(''))
     setGameStarted(true)
+    setGuessesLeft(5)
+    setGameOver(false)
+    setGameWon(false)
   }
 
   const goBack = () => {
@@ -80,15 +86,21 @@ export default function AcronynjaNinja() {
   }
 
   const submitGuess = () => {
+    if (gameOver) return 
+
     const isCorrect = guess.every((word, index) => 
       word.toLowerCase() === currentAcronymObj.words[index].toLowerCase()
     )
     if (isCorrect) {
       setShowConfetti(true)
+      setGameWon(true)
+      setGameOver(true)
       // Handle win condition
     } else {
-      setGuessesLeft(guessesLeft - 1)
-      if (guessesLeft === 1) {
+      const newGuessesLeft = guessesLeft - 1
+      setGuessesLeft(newGuessesLeft)
+      if (newGuessesLeft === 0) {
+        setGameOver(true)
         // Handle lose condition
       }
     }
@@ -101,6 +113,7 @@ export default function AcronynjaNinja() {
 
   const showAnswer = () => {
    setGuess(currentAcronymObj.words)
+   setGameOver(true)
   }
 
   return (
@@ -123,6 +136,8 @@ export default function AcronynjaNinja() {
             getHint={getHint}
             showAnswer={showAnswer}
             goBack={goBack}
+            gameOver={gameOver}
+            gameWon={gameWon}
           />
         )}
       </motion.div>
@@ -180,6 +195,8 @@ function GameScreen({
   getHint,
   showAnswer,
   goBack,
+  gameOver,
+  gameWon,
 }) {
   return (
     <div className="text-center">
@@ -201,51 +218,70 @@ function GameScreen({
       <p className="text-2xl font-bold text-gray-800 mb-6">
         The acronym is: <span className="text-purple-600">{currentAcronymObj.acronym}</span>
       </p>
-      <div className="space-y-4 mb-6">
-      {currentAcronymObj.words.map((word, index) => (
-          <div key={index} className="flex items-center justify-center space-x-2">
-            <span className="text-xl font-semibold text-purple-600">{currentAcronymObj.acronym[index]} =</span>
-            <input
-              type="text"
-              value={guess[index]}
-              onChange={(e) => {
-                const newGuess = [...guess]
-                newGuess[index] = e.target.value
-                setGuess(newGuess)
-              }}
-              className="border-2 border-purple-300 rounded-md px-3 py-2 focus:outline-none focus:border-purple-500"
-              placeholder="Enter your guess"
-            />
-          </div>
-        ))}
-      </div>
+      {gameOver ? (
+        <div className="mb-6">
+          <p className="text-2xl font-bold text-purple-600 mb-4">
+            {gameWon ? "Congratulations! You won!" : "You lost!"}
+          </p>
+          <p className="text-xl text-gray-800">
+            The correct answer was:
+          </p>
+          <p className="text-xl font-semibold text-purple-600">
+            {currentAcronymObj.words.join(' ')}
+          </p>
+        </div>
+      ) : (
+        <div className="space-y-4 mb-6">
+          {currentAcronymObj.words.map((word, index) => (
+            <div key={index} className="flex items-center justify-center space-x-2">
+              <span className="text-xl font-semibold text-purple-600">{currentAcronymObj.acronym[index]} =</span>
+              <input
+                type="text"
+                value={guess[index]}
+                onChange={(e) => {
+                  const newGuess = [...guess]
+                  newGuess[index] = e.target.value
+                  setGuess(newGuess)
+                }}
+                className="border-2 border-purple-300 rounded-md px-3 py-2 focus:outline-none focus:border-purple-500"
+                placeholder="Enter your guess"
+                disabled={gameOver}
+              />
+            </div>
+          ))}
+        </div>
+      )}
       <div className="space-y-4">
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="w-full px-6 py-3 bg-purple-600 text-white rounded-full font-semibold shadow-md hover:bg-purple-700 transition duration-300"
-          onClick={submitGuess}
-        >
-          Submit your guess
-        </motion.button>
+        {!gameOver && (
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="w-full px-6 py-3 bg-purple-600 text-white rounded-full font-semibold shadow-md hover:bg-purple-700 transition duration-300"
+            onClick={submitGuess}
+          >
+            Submit your guess
+          </motion.button>
+        )}
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           className="w-full px-6 py-3 bg-blue-500 text-white rounded-full font-semibold shadow-md hover:bg-blue-600 transition duration-300"
           onClick={getHint}
+          disabled={gameOver}
         >
           Get a hint
         </motion.button>
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="w-full px-6 py-3 bg-gray-500 text-white rounded-full font-semibold shadow-md hover:bg-gray-600 transition duration-300"
-          onClick={showAnswer}
-        >
-          Show me the answer
-        </motion.button>
+        {!gameOver && (
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="w-full px-6 py-3 bg-gray-500 text-white rounded-full font-semibold shadow-md hover:bg-gray-600 transition duration-300"
+            onClick={showAnswer}
+          >
+            Show me the answer
+          </motion.button>
+        )}
       </div>
     </div>
   )
 }
-
