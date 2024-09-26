@@ -198,6 +198,11 @@ function GameScreen({
   gameOver,
   gameWon,
 }) {
+
+  const restartGame = () => {
+    goBack(); // Go back to the start screen and reset everything
+  };
+
   return (
     <div className="text-center">
       <div className="flex justify-between items-center mb-6">
@@ -262,6 +267,7 @@ function GameScreen({
             Submit your guess
           </motion.button>
         )}
+        {!gameOver ? (
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -271,6 +277,18 @@ function GameScreen({
         >
           Get a hint
         </motion.button>
+        ) : (
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="w-full px-6 py-3 bg-green-500 text-white rounded-full font-semibold shadow-md hover:bg-green-600 transition duration-300"
+            onClick={restartGame}
+          >
+            New Game
+          </motion.button>
+        )} 
+
+
         {!gameOver && (
           <motion.button
             whileHover={{ scale: 1.05 }}
