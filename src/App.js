@@ -309,6 +309,18 @@ function GameScreen({
     goBack(); // Go back to the start screen and reset everything
   };
 
+  const shareWithFriend = () => {
+    const gameUrl = 'https://styled-game.vercel.app/';
+    const message = `I just solved the acronym ${currentAcronymObj.acronym} in Acronynja! Want to test your skills? Play here: ${gameUrl}`;
+    const encodedMessage = encodeURIComponent(message);
+    const smsUrl = `sms:?&body=${encodedMessage}`;
+    
+    window.open(smsUrl, '_blank');
+    // Implement share functionality here
+    // For now, we'll just log a message
+    console.log("Sharing functionality to be implemented");
+  };
+
   return (
     <div className="text-center">
       <div className="flex justify-between items-center mb-6">
@@ -378,28 +390,37 @@ function GameScreen({
           </motion.button>
         )}
         {!gameOver ? (
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="w-full px-6 py-3 bg-blue-500 text-white rounded-full font-semibold shadow-md hover:bg-blue-600 transition duration-300"
-            hintDisabled
-            
-          onClick={getHint}
-          disabled={gameOver || guessesLeft <= 1}
-        >
-          Get a hint
-        </motion.button>
-        ) : (
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="w-full px-6 py-3 bg-green-500 text-white rounded-full font-semibold shadow-md hover:bg-green-600 transition duration-300"
-            onClick={restartGame}
+            className="w-full px-6 py-3 bg-blue-500 text-white rounded-full font-semibold shadow-md hover:bg-blue-600 transition duration-300"
+            onClick={getHint}
+            disabled={gameOver || guessesLeft <= 1}
           >
-            New Game
+            Get a Hint
           </motion.button>
-        )} 
-
+        ) : (
+          <>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full px-6 py-3 bg-green-500 text-white rounded-full font-semibold shadow-md hover:bg-green-600 transition duration-300"
+              onClick={restartGame}
+            >
+              New Game
+            </motion.button>
+            {gameWon && (
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full px-6 py-3 bg-cyan-400 text-white rounded-full font-semibold shadow-md hover:bg-blue-400 transition duration-300"
+                onClick={shareWithFriend}
+              >
+                Share With a Friend!
+              </motion.button>
+            )}
+          </>
+        )}
 
         {!gameOver && (
           <motion.button
@@ -408,7 +429,7 @@ function GameScreen({
             className="w-full px-6 py-3 bg-gray-500 text-white rounded-full font-semibold shadow-md hover:bg-gray-600 transition duration-300"
             onClick={showAnswer}
           >
-            Show me the Answers 
+            Show Me the Answer 
           </motion.button>
         )}
       </div>
