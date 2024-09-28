@@ -310,7 +310,7 @@ function GameScreen({
   };
 
   const shareWithFriend = () => {
-    const gameUrl = 'https://styled-game.vercel.app/';
+    const gameUrl = 'https://acronynja-game.vercel.app/';
     const message = `I just solved the acronym ${currentAcronymObj.acronym} in Acronynja! Want to test your skills? Play here: ${gameUrl}`;
     const encodedMessage = encodeURIComponent(message);
     const smsUrl = `sms:?&body=${encodedMessage}`;
