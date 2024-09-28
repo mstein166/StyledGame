@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Sword, Target, Zap, ArrowLeft } from 'lucide-react'
 import Confetti from 'react-confetti'
@@ -17,7 +17,6 @@ const acronyms = {
     { acronym: 'SQL', words: ['Structured', 'Query', 'Language'] },
     { acronym: 'VOIP', words: ['Voice', 'Over', 'Internet', 'Protocol'] },
     { acronym: 'OCR', words: ['Optical', 'Character', 'Recognition'] },
-    { acronym: 'ROFL', words: ['Rolling', 'On', 'The', 'Floor', 'Laughing'] },
     { acronym: 'PTSD', words: ['Post', 'Traumatic', 'Stress', 'Disorder'] }
   ],
   Medium: [
@@ -64,7 +63,15 @@ export default function AcronynjaNinja() {
   //testing game over
   const [gameOver, setGameOver] = useState(false)
   const [gameWon, setGameWon] = useState(false)
+  const [feedback, setFeedback] = useState([])
+  const [hintDisabled, setHintDisabled] = useState(false);
 
+  useEffect(() => {
+    if (currentAcronymObj) {
+      const incorrectCount = feedback.filter(status => status !== 'correct').length;
+      setHintDisabled(incorrectCount <= 1 || guessesLeft <= 1 || gameOver);
+    }
+  }, [feedback, guessesLeft, gameOver, currentAcronymObj]);
 
   const startGame = (selectedDifficulty) => {
     setDifficulty(selectedDifficulty)
@@ -75,6 +82,7 @@ export default function AcronynjaNinja() {
     setGuessesLeft(5)
     setGameOver(false)
     setGameWon(false)
+    setFeedback([])
   }
 
   const goBack = () => {
@@ -91,6 +99,12 @@ export default function AcronynjaNinja() {
     const isCorrect = guess.every((word, index) => 
       word.toLowerCase() === currentAcronymObj.words[index].toLowerCase()
     )
+
+    const newFeedback = guess.map((word, index) => 
+      word.toLowerCase() === currentAcronymObj.words[index].toLowerCase() ? 'correct' : 'incorrect'
+    )
+    setFeedback(newFeedback)
+
     if (isCorrect) {
       setShowConfetti(true)
       setGameWon(true)
@@ -109,6 +123,40 @@ export default function AcronynjaNinja() {
 
   const getHint = () => {
     // Implement hint logic here
+    if (gameOver || hintDisabled) return;
+
+    // Find indices of incorrect guesses
+    const incorrectIndices = feedback.reduce((acc, status, index) => {
+      if (status !== 'correct') acc.push(index);
+      return acc;
+    }, []);
+
+    if (incorrectIndices.length === 0) return; // All words are correct
+
+    // Choose a random incorrect index
+    const randomIndex = incorrectIndices[Math.floor(Math.random() * incorrectIndices.length)];
+
+    // Update the guess and feedback for the chosen word
+    const newGuess = [...guess];
+    newGuess[randomIndex] = currentAcronymObj.words[randomIndex];
+    setGuess(newGuess);
+
+    const newFeedback = [...feedback];
+    newFeedback[randomIndex] = 'correct';
+    setFeedback(newFeedback);
+
+    // Decrease guesses left
+    setGuessesLeft(guessesLeft - 1);
+
+    // Check if the game is won after the hint
+    if (newGuess.every((word, index) => word.toLowerCase() === currentAcronymObj.words[index].toLowerCase())) {
+      setShowConfetti(true);
+      setGameWon(true);
+      setGameOver(true);
+    } else if (guessesLeft - 1 === 0) {
+      // Game over if no guesses left after using the hint
+      setGameOver(true);
+    }
   }
 
   const showAnswer = () => {
@@ -138,6 +186,8 @@ export default function AcronynjaNinja() {
             goBack={goBack}
             gameOver={gameOver}
             gameWon={gameWon}
+            feedback={feedback}
+            hintDisabled={hintDisabled}
           />
         )}
       </motion.div>
@@ -197,6 +247,7 @@ function GameScreen({
   goBack,
   gameOver,
   gameWon,
+  feedback,
 }) {
 
   const restartGame = () => {
@@ -248,9 +299,13 @@ function GameScreen({
                   newGuess[index] = e.target.value
                   setGuess(newGuess)
                 }}
-                className="border-2 border-purple-300 rounded-md px-3 py-2 focus:outline-none focus:border-purple-500"
+                className={`border-2 rounded-md px-3 py-2 focus:outline-none ${
+                  feedback[index] === 'correct'
+                    ? 'border-green-500 bg-green-100'
+                    : 'border-purple-300 focus:border-purple-500'
+                }`}
                 placeholder="Enter your guess"
-                disabled={gameOver}
+                disabled={gameOver || feedback[index] === 'correct'}
               />
             </div>
           ))}
@@ -272,8 +327,10 @@ function GameScreen({
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           className="w-full px-6 py-3 bg-blue-500 text-white rounded-full font-semibold shadow-md hover:bg-blue-600 transition duration-300"
+            hintDisabled
+            
           onClick={getHint}
-          disabled={gameOver}
+          disabled={gameOver || guessesLeft <= 1}
         >
           Get a hint
         </motion.button>
@@ -296,7 +353,7 @@ function GameScreen({
             className="w-full px-6 py-3 bg-gray-500 text-white rounded-full font-semibold shadow-md hover:bg-gray-600 transition duration-300"
             onClick={showAnswer}
           >
-            Show me the answer
+            Show me the Answers 
           </motion.button>
         )}
       </div>
