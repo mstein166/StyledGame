@@ -386,7 +386,7 @@ function GameScreen({
             className="w-full px-6 py-3 bg-purple-600 text-white rounded-full font-semibold shadow-md hover:bg-purple-700 transition duration-300"
             onClick={submitGuess}
           >
-            Submit your guess
+            Submit Your Guess
           </motion.button>
         )}
         {!gameOver ? (
