@@ -90,7 +90,6 @@ const acronyms = {
     { acronym: 'CSPAN', words: ['Cable', 'Satellite', 'Public', 'Access','Network']},
     { acronym: 'FEMA', words: ['Federal', 'Emergency', 'Management', 'System'] },
     { acronym: 'SCOTUS', words: ['Supreme', 'Court', 'Of', 'The', 'United', 'States'] },
-    { acronym: 'UNESCO', words: ['United', 'Nations', 'Educational', 'Scientific', 'and', 'Cultural', 'Organization'] },
     { acronym: 'INTERPOL', words: ['International', 'Criminal', 'Police', 'Organization'] },
     { acronym: 'USB', words: ['Universal', 'Serial', 'Bus'] },
     { acronym: 'OCR', words: ['Optical', 'Character', 'Recognition'] },
