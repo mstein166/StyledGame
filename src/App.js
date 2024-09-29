@@ -41,7 +41,7 @@ const acronyms = {
     { acronym: 'NSFW', words: ['Not', 'Safe', 'For', 'Work'] }
   ],
   Medium: [
-    { acronym: 'WYSIWYG', words: ['What', 'You', 'See', 'Is', 'What', 'You', 'Get'] },
+    { acronym: 'WYSIWG', words: ['What', 'You', 'See', 'Is', 'What', 'You', 'Get'] },
     { acronym: 'BBB', words: ['Better', 'Business', 'Bureau']},
     { acronym: 'CPG', words: ['Consumer', 'Packaged', 'Goods'] },
     { acronym: 'BCS', words: ['Bowl', 'Championship', 'Series']},
@@ -393,9 +393,13 @@ function GameScreen({
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="w-full px-6 py-3 bg-blue-500 text-white rounded-full font-semibold shadow-md hover:bg-blue-600 transition duration-300"
+            className={`w-full px-6 py-3 text-white rounded-full font-semibold shadow-md transition duration-300 ${
+              gameOver || guessesLeft <= 1 || guessesLeft === 5
+                ? 'bg-gray-300 cursor-not-allowed'
+                : 'bg-blue-500 hover:bg-blue-600'
+            }`}
             onClick={getHint}
-            disabled={gameOver || guessesLeft <= 1}
+            disabled={gameOver || guessesLeft <= 1 || guessesLeft === 5}
           >
             Get a Hint
           </motion.button>
@@ -426,7 +430,7 @@ function GameScreen({
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="w-full px-6 py-3 bg-gray-500 text-white rounded-full font-semibold shadow-md hover:bg-gray-600 transition duration-300"
+            className="w-full px-6 py-3 bg-red-400 text-white rounded-full font-semibold shadow-md hover:bg-red-00 transition duration-300"
             onClick={showAnswer}
           >
             Show Me the Answer 
