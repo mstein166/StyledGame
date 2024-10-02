@@ -38,11 +38,13 @@ const acronyms = {
     { acronym: 'POTUS', words: ['President', 'Of', 'The', 'United', 'States'] },
     { acronym: 'CST', words: ['Central', 'Standard', 'Time']},
     { acronym: 'EDT', words: ['Eastern', 'Daylight', 'Time']},
+    { acronym: 'CPI', words: ['Consumer', 'Price', 'Index']},
     { acronym: 'NSFW', words: ['Not', 'Safe', 'For', 'Work'] }
   ],
   Medium: [
     { acronym: 'WYSIWG', words: ['What', 'You', 'See', 'Is', 'What', 'You', 'Get'] },
     { acronym: 'BBB', words: ['Better', 'Business', 'Bureau']},
+    { acronym: 'ASL', words: ['American', 'Sign', 'Language']},
     { acronym: 'CPG', words: ['Consumer', 'Packaged', 'Goods'] },
     { acronym: 'BCS', words: ['Bowl', 'Championship', 'Series']},
     { acronym: 'RAM', words: ['Random', 'Access', 'Memory'] },
