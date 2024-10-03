@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Sword, Target, Zap, ArrowLeft } from 'lucide-react'
 import Confetti from 'react-confetti'
+import { Analytics } from "@vercel/analytics/react"
 
 const acronyms = {
   Easy: [
