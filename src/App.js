@@ -256,6 +256,7 @@ export default function AcronynjaNinja() {
 function StartScreen({ startGame }) {
   return (
     <div className="text-center">
+     <Analytics />
       <motion.h1
         initial={{ y: -20 }}
         animate={{ y: 0 }}
