@@ -467,32 +467,32 @@ function GameScreen({
             Submit Your Guess
           </motion.button>
         )}
-        { isTimed ? (
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-full px-6 py-3 bg-yellow-500 text-white rounded-full font-semibold shadow-md hover:bg-yellow-600 transition duration-300"
-              onClick={skipAcronym}
-            >
-              Skip
-            </motion.button>
-          ) : (
-    
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className={`w-full px-6 py-3 text-white rounded-full font-semibold shadow-md transition duration-300 ${
-              gameOver || guessesLeft <= 1 || guessesLeft === 5
-                ? 'bg-gray-300 cursor-not-allowed'
-                : 'bg-blue-500 hover:bg-blue-600'
-            }`}
-            onClick={getHint}
-            disabled={gameOver || guessesLeft <= 1 || guessesLeft === 5}
-          >
-            Get a Hint
-          </motion.button>
-        ) 
-        }
+       {!gameOver && isTimed && (
+    <motion.button
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      className="w-full px-6 py-3 bg-yellow-500 text-white rounded-full font-semibold shadow-md hover:bg-yellow-600 transition duration-300"
+      onClick={skipAcronym}
+    >
+      Skip
+    </motion.button>
+  )}
+  {/* Ensure the Get a Hint button does not show when time is over */}
+  {!gameOver && !isTimed && (
+    <motion.button
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      className={`w-full px-6 py-3 text-white rounded-full font-semibold shadow-md transition duration-300 ${
+        gameOver || guessesLeft <= 1 || guessesLeft === 5
+          ? 'bg-gray-300 cursor-not-allowed'
+          : 'bg-blue-500 hover:bg-blue-600'
+      }`}
+      onClick={getHint}
+      disabled={gameOver || guessesLeft <= 1 || guessesLeft === 5}
+    >
+      Get a Hint
+    </motion.button>
+  )}
            {gameOver && (
           <>
             <motion.button
