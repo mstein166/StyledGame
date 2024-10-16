@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Sword, Target, Zap, ArrowLeft } from 'lucide-react'
+import { Sword, Target, Zap, Clock, ArrowLeft } from 'lucide-react'
 import Confetti from 'react-confetti'
 import { Analytics } from "@vercel/analytics/react"
 
@@ -43,7 +43,7 @@ const acronyms = {
     { acronym: 'NSFW', words: ['Not', 'Safe', 'For', 'Work'] }
   ],
   Medium: [
-    { acronym: 'WYSIWG', words: ['What', 'You', 'See', 'Is', 'What', 'You', 'Get'] },
+    { acronym: 'WYSIWYG', words: ['What', 'You', 'See', 'Is', 'What', 'You', 'Get'] },
     { acronym: 'BBB', words: ['Better', 'Business', 'Bureau']},
     { acronym: 'ASL', words: ['American', 'Sign', 'Language']},
     { acronym: 'CPG', words: ['Consumer', 'Packaged', 'Goods'] },
@@ -122,6 +122,15 @@ export default function AcronynjaNinja() {
   const [gameWon, setGameWon] = useState(false)
   const [feedback, setFeedback] = useState([])
   const [hintDisabled, setHintDisabled] = useState(false);
+  //testing timed mode
+  const [timeLeft, setTimeLeft] = useState(30);
+  const [isTimed, setIsTimed] = useState(false);
+  const [correctGuesses, setCorrectGuesses] = useState(0);
+  const skipAcronym = () => {
+    if (isTimed && !gameOver) {
+      nextAcronym();
+    }
+  }
 
   useEffect(() => {
     if (currentAcronymObj) {
@@ -130,16 +139,47 @@ export default function AcronynjaNinja() {
     }
   }, [feedback, guessesLeft, gameOver, currentAcronymObj]);
 
+  useEffect(() => {
+    let timer;
+    if (isTimed && timeLeft > 0 && !gameOver) {
+      timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+    } else if (isTimed && timeLeft === 0 && !gameOver) {
+      setGameOver(true);
+    }
+    return () => clearTimeout(timer);
+  }, [isTimed, timeLeft, gameOver]);
+
   const startGame = (selectedDifficulty) => {
     setDifficulty(selectedDifficulty)
-    const randomAcronymObj = acronyms[selectedDifficulty][Math.floor(Math.random() * acronyms[selectedDifficulty].length)]
-    setCurrentAcronymObj(randomAcronymObj)
-    setGuess(Array(randomAcronymObj.words.length).fill(''))
     setGameStarted(true)
     setGuessesLeft(5)
     setGameOver(false)
     setGameWon(false)
     setFeedback([])
+    setCorrectGuesses(0)
+    setIsTimed(selectedDifficulty === 'Timed')
+    setTimeLeft(30)
+    
+    if (selectedDifficulty === 'Timed') {
+      nextAcronym()
+    } else {
+      setCurrentAcronymObj(getRandomAcronym(selectedDifficulty))
+    }
+  }
+
+  const getRandomAcronym = (difficulty) => {
+    const difficulties = ['Easy', 'Medium', 'Hard'];
+    const selectedDifficulty = difficulty === 'Timed' 
+      ? difficulties[Math.floor(Math.random() * difficulties.length)]
+      : difficulty;
+    return acronyms[selectedDifficulty][Math.floor(Math.random() * acronyms[selectedDifficulty].length)];
+  }
+
+  const nextAcronym = () => {
+    const newAcronym = getRandomAcronym('Timed');
+    setCurrentAcronymObj(newAcronym);
+    setGuess(Array(newAcronym.words.length).fill(''));
+    setFeedback([]);
   }
 
   const goBack = () => {
@@ -148,6 +188,9 @@ export default function AcronynjaNinja() {
     setShowConfetti(false)
     setGuess([])
     setCurrentAcronymObj(null)
+    setTimeLeft(30)
+    setCorrectGuesses(0)
+    setGameOver(false)
   }
 
   const submitGuess = () => {
@@ -163,16 +206,19 @@ export default function AcronynjaNinja() {
     setFeedback(newFeedback)
 
     if (isCorrect) {
-      setShowConfetti(true)
-      setGameWon(true)
-      setGameOver(true)
-      // Handle win condition
-    } else {
+      if (isTimed) {
+        setCorrectGuesses(prevCorrectGuesses => prevCorrectGuesses + 1)
+        nextAcronym()
+      } else {
+        setShowConfetti(true)
+        setGameWon(true)
+        setGameOver(true)
+      }
+    } else if (!isTimed) {
       const newGuessesLeft = guessesLeft - 1
       setGuessesLeft(newGuessesLeft)
       if (newGuessesLeft === 0) {
         setGameOver(true)
-        // Handle lose condition
       }
     }
   }
@@ -245,6 +291,10 @@ export default function AcronynjaNinja() {
             gameWon={gameWon}
             feedback={feedback}
             hintDisabled={hintDisabled}
+            isTimed={isTimed}
+            timeLeft={timeLeft}
+            correctGuesses={correctGuesses}
+            skipAcronym={skipAcronym}
           />
         )}
       </motion.div>
@@ -289,6 +339,16 @@ function StartScreen({ startGame }) {
             {level}
           </motion.button>
         ))}
+        <h2 className="text-xl font-semibold text-gray-800 mb-4">Or see how many you can solve in 30 seconds!</h2>
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="px-6 py-3 rounded-full text-white font-semibold shadow-md bg-orange-500 hover:bg-orange-600"
+          onClick={() => startGame('Timed')}
+        >
+          <Clock className="inline-block mr-2" />
+          Timed Mode
+        </motion.button>
       </div>
     </div>
   )
@@ -306,6 +366,11 @@ function GameScreen({
   gameOver,
   gameWon,
   feedback,
+  hintDisabled,
+  isTimed,
+  timeLeft,
+  correctGuesses,
+  skipAcronym
 }) {
 
   const restartGame = () => {
@@ -338,23 +403,33 @@ function GameScreen({
         <h1 className="text-3xl font-bold text-purple-600">Acronynja</h1>
         <div className="w-6" /> {/* Spacer for alignment */}
       </div>
-      <p className="text-xl font-semibold text-gray-800 mb-4">
-        Guesses left: <span className="text-purple-600">{guessesLeft}</span>
-      </p>
+      {!isTimed && (
+    <p className="text-xl font-semibold text-gray-800 mb-4">
+      Guesses left: <span className="text-purple-600">{guessesLeft}</span>
+    </p>
+  )}
       <p className="text-2xl font-bold text-gray-800 mb-6">
         The acronym is: <span className="text-purple-600">{currentAcronymObj.acronym}</span>
       </p>
       {gameOver ? (
         <div className="mb-6">
           <p className="text-2xl font-bold text-purple-600 mb-4">
-            {gameWon ? "Congratulations! You won!" : "You lost!"}
+            {isTimed ? "Time's up!" : (gameWon ? "Congratulations! You won!" : "You lost!")}
           </p>
-          <p className="text-xl text-gray-800">
-            The correct answer was:
-          </p>
-          <p className="text-xl font-semibold text-purple-600">
-            {currentAcronymObj.words.join(' ')}
-          </p>
+          {isTimed ? (
+            <p className="text-xl text-gray-800">
+              You correctly guessed <span className="font-semibold text-green-600">{correctGuesses}</span> acronyms!
+            </p>
+          ) : (
+            <>
+              <p className="text-xl text-gray-800">
+                The correct answer was:
+              </p>
+              <p className="text-xl font-semibold text-purple-600">
+                {currentAcronymObj.words.join(' ')}
+              </p>
+            </>
+          )}
         </div>
       ) : (
         <div className="space-y-4 mb-6">
@@ -392,7 +467,17 @@ function GameScreen({
             Submit Your Guess
           </motion.button>
         )}
-        {!gameOver ? (
+        { isTimed ? (
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full px-6 py-3 bg-yellow-500 text-white rounded-full font-semibold shadow-md hover:bg-yellow-600 transition duration-300"
+              onClick={skipAcronym}
+            >
+              Skip
+            </motion.button>
+          ) : (
+    
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -406,7 +491,9 @@ function GameScreen({
           >
             Get a Hint
           </motion.button>
-        ) : (
+        ) 
+        }
+           {gameOver && (
           <>
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -440,6 +527,16 @@ function GameScreen({
           </motion.button>
         )}
       </div>
+      {isTimed && (
+        <div className="mb-4">
+          <p className="text-xl font-semibold text-gray-800">
+            Time left: <span className="text-purple-600">{timeLeft}</span>
+          </p>
+          <p className="text-xl font-semibold text-gray-800">
+            Correct guesses: <span className="text-green-600">{correctGuesses}</span>
+          </p>
+        </div>
+      )}
     </div>
   )
 }
