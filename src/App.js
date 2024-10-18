@@ -386,7 +386,13 @@ function GameScreen({
 
   const shareWithFriend = () => {
     const gameUrl = 'https://acronynja-game.vercel.app/';
-    const message = `I just solved the acronym ${currentAcronymObj.acronym} in Acronynja! Want to test your skills? Play here: ${gameUrl}`;
+    let message; 
+    if (isTimed) {
+      message = `I just solved ${correctGuesses} acronyms in 30 seconds in Acronynja! Think you can beat me? Play here: ${gameUrl}`;
+    } else {
+      message = `I just solved the acronym ${currentAcronymObj.acronym} in Acronynja! Want to test your skills? Play here: ${gameUrl}`;
+    }
+
     const encodedMessage = encodeURIComponent(message);
     const smsUrl = `sms:?&body=${encodedMessage}`;
 
@@ -506,9 +512,9 @@ function GameScreen({
               className="w-full px-6 py-3 bg-green-500 text-white rounded-full font-semibold shadow-md hover:bg-green-600 transition duration-300"
               onClick={restartGame}
             >
-              New Game
+             New Game
             </motion.button>
-            {(gameWon || (isTimed && gameOver)) &&  (
+            {(gameWon || gameOver) &&  (
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -520,6 +526,7 @@ function GameScreen({
             )}
           </>
         )}
+
 
         {!gameOver && (
           <motion.button
