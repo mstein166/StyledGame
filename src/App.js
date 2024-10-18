@@ -18,49 +18,49 @@ const acronyms = {
     { acronym: 'OMG', words: ['Oh', 'My', 'God'] },
     { acronym: 'SQL', words: ['Structured', 'Query', 'Language'] },
     { acronym: 'PTSD', words: ['Post', 'Traumatic', 'Stress', 'Disorder'] },
-    { acronym: 'BYOB', words: ['Bring', 'Your', 'Own','Beverage']},
-    { acronym: 'CMO', words: ['Chief', 'Marketing', 'Officer']},
-    { acronym: 'CRM', words: ['Customer', 'Relationship', 'Management']},
-    { acronym: 'ISP', words: ['Internet', 'Service', 'Provider']},
-    { acronym: 'KPI', words: ['Key', 'Performance', 'Indicator']},
-    { acronym: 'LAN', words: ['Local', 'Area', 'Network']},
-    { acronym: 'LMS', words: ['Learning', 'Management', 'System']},
-    { acronym: 'RFP', words: ['Request', 'For', 'Proposal']},
-    { acronym: 'ROI', words: ['Return', 'On', 'Investment']},
-    { acronym: 'SEO', words: ['Search', 'Engine', 'Optimization']},
-    { acronym: 'SLA', words: ['Service', 'Level', 'Agreement']},
+    { acronym: 'BYOB', words: ['Bring', 'Your', 'Own', 'Beverage'] },
+    { acronym: 'CMO', words: ['Chief', 'Marketing', 'Officer'] },
+    { acronym: 'CRM', words: ['Customer', 'Relationship', 'Management'] },
+    { acronym: 'ISP', words: ['Internet', 'Service', 'Provider'] },
+    { acronym: 'KPI', words: ['Key', 'Performance', 'Indicator'] },
+    { acronym: 'LAN', words: ['Local', 'Area', 'Network'] },
+    { acronym: 'LMS', words: ['Learning', 'Management', 'System'] },
+    { acronym: 'RFP', words: ['Request', 'For', 'Proposal'] },
+    { acronym: 'ROI', words: ['Return', 'On', 'Investment'] },
+    { acronym: 'SEO', words: ['Search', 'Engine', 'Optimization'] },
+    { acronym: 'SLA', words: ['Service', 'Level', 'Agreement'] },
     { acronym: 'YOLO', words: ['You', 'Only', 'Live', 'Once'] },
-    { acronym: 'TBD', words: ['To', 'Be', 'Determined']},
-    { acronym: 'WIP', words: ['Work', 'In', 'Progress']},
-    { acronym: 'AKA', words: ['Also', 'Known', 'As']},
-    { acronym: 'IHOP', words: ['International', 'House', 'Of', 'Pancakes']},
-    { acronym: 'BPM', words: ['Beats', 'Per', 'Minute']},
-    { acronym: 'BTW', words: ['By', 'The', 'Way']},
+    { acronym: 'TBD', words: ['To', 'Be', 'Determined'] },
+    { acronym: 'WIP', words: ['Work', 'In', 'Progress'] },
+    { acronym: 'AKA', words: ['Also', 'Known', 'As'] },
+    { acronym: 'IHOP', words: ['International', 'House', 'Of', 'Pancakes'] },
+    { acronym: 'BPM', words: ['Beats', 'Per', 'Minute'] },
+    { acronym: 'BTW', words: ['By', 'The', 'Way'] },
     { acronym: 'POTUS', words: ['President', 'Of', 'The', 'United', 'States'] },
-    { acronym: 'CST', words: ['Central', 'Standard', 'Time']},
-    { acronym: 'EDT', words: ['Eastern', 'Daylight', 'Time']},
-    { acronym: 'CPI', words: ['Consumer', 'Price', 'Index']},
+    { acronym: 'CST', words: ['Central', 'Standard', 'Time'] },
+    { acronym: 'EDT', words: ['Eastern', 'Daylight', 'Time'] },
+    { acronym: 'CPI', words: ['Consumer', 'Price', 'Index'] },
     { acronym: 'NSFW', words: ['Not', 'Safe', 'For', 'Work'] }
   ],
   Medium: [
     { acronym: 'WYSIWYG', words: ['What', 'You', 'See', 'Is', 'What', 'You', 'Get'] },
-    { acronym: 'BBB', words: ['Better', 'Business', 'Bureau']},
-    { acronym: 'ASL', words: ['American', 'Sign', 'Language']},
+    { acronym: 'BBB', words: ['Better', 'Business', 'Bureau'] },
+    { acronym: 'ASL', words: ['American', 'Sign', 'Language'] },
     { acronym: 'CPG', words: ['Consumer', 'Packaged', 'Goods'] },
-    { acronym: 'BCS', words: ['Bowl', 'Championship', 'Series']},
+    { acronym: 'BCS', words: ['Bowl', 'Championship', 'Series'] },
     { acronym: 'RAM', words: ['Random', 'Access', 'Memory'] },
-    { acronym: 'ACC', words: ['Atlantic', 'Coast', 'Conference']},
-    { acronym: 'AAA', words: ['American', 'Automobile', 'Association']},
-    { acronym: 'ABM', words: ['Anti', 'Ballistic', 'Missile']},
-    { acronym: 'PIN', words: ['Personal', 'Identification', 'Number']},
+    { acronym: 'ACC', words: ['Atlantic', 'Coast', 'Conference'] },
+    { acronym: 'AAA', words: ['American', 'Automobile', 'Association'] },
+    { acronym: 'ABM', words: ['Anti', 'Ballistic', 'Missile'] },
+    { acronym: 'PIN', words: ['Personal', 'Identification', 'Number'] },
     { acronym: 'ADHD', words: ['Attention', 'Deficit', 'Hyperactivity', 'Disorder'] },
     { acronym: 'VOIP', words: ['Voice', 'Over', 'Internet', 'Protocol'] },
-    { acronym: 'OEM', words: ['Original', 'Equipment', 'Manufacturer']},
-    { acronym: 'ETL', words: ['Extract', 'Transform', 'Load']},
-    { acronym: 'FTP', words: ['File', 'Transfer', 'Protocol']},
-    { acronym: 'LCD', words: ['Liquid', 'Crystal', 'Display']},
-    { acronym: 'VAT', words: ['Value', 'Added', 'Tax']},
-    { acronym: 'SDK', words: ['Standard', 'Development', 'Kit']},
+    { acronym: 'OEM', words: ['Original', 'Equipment', 'Manufacturer'] },
+    { acronym: 'ETL', words: ['Extract', 'Transform', 'Load'] },
+    { acronym: 'FTP', words: ['File', 'Transfer', 'Protocol'] },
+    { acronym: 'LCD', words: ['Liquid', 'Crystal', 'Display'] },
+    { acronym: 'VAT', words: ['Value', 'Added', 'Tax'] },
+    { acronym: 'SDK', words: ['Standard', 'Development', 'Kit'] },
     { acronym: 'KISS', words: ['Keep', 'It', 'Simple', 'Stupid'] },
     { acronym: 'CRUD', words: ['Create', 'Read', 'Update', 'Delete'] },
     { acronym: 'PDF', words: ['Portable', 'Document', 'Format'] },
@@ -73,32 +73,32 @@ const acronyms = {
     { acronym: 'ESA', words: ['European', 'Space', 'Agency'] },
     { acronym: 'CSS', words: ['Cascading', 'Style', 'Sheets'] },
     { acronym: 'DNS', words: ['Domain', 'Name', 'System'] },
-    { acronym: 'VPN', words: ['Virtual', 'Private', 'Network']},
-    { acronym: 'CAD', words: ['Computer', 'Aided', 'Design']},
-    { acronym: 'CPA', words: ['Certified', 'Public', 'Accountant']},
-    { acronym: 'BMI', words: ['Body', 'Mass', 'Index']},
-    { acronym: 'CPU', words: ['Central', 'Processing', 'Unit']},
-    { acronym: 'EBT', words: ['Earnings', 'Before', 'Taxes']},
-    { acronym: 'ECB', words: ['European', 'Central', 'Bank']},
-    { acronym: 'ELL', words: ['English', 'Language', 'Learner']},
+    { acronym: 'VPN', words: ['Virtual', 'Private', 'Network'] },
+    { acronym: 'CAD', words: ['Computer', 'Aided', 'Design'] },
+    { acronym: 'CPA', words: ['Certified', 'Public', 'Accountant'] },
+    { acronym: 'BMI', words: ['Body', 'Mass', 'Index'] },
+    { acronym: 'CPU', words: ['Central', 'Processing', 'Unit'] },
+    { acronym: 'EBT', words: ['Earnings', 'Before', 'Taxes'] },
+    { acronym: 'ECB', words: ['European', 'Central', 'Bank'] },
+    { acronym: 'ELL', words: ['English', 'Language', 'Learner'] },
     { acronym: 'TKO', words: ['Technical', 'Knock', 'Out'] }
   ],
   Hard: [
 
-    { acronym: 'BEV', words: ['Battery', 'Electric', 'Vehicle']},
-    { acronym: 'EEZ', words: ['Economic', 'Exclusion', 'Zone']},
-    { acronym: 'CCG', words: ['Collectible', 'Card', 'Game']},
-    { acronym: 'CDS', words: ['Credit', 'Default', 'Swap']},
+    { acronym: 'BEV', words: ['Battery', 'Electric', 'Vehicle'] },
+    { acronym: 'EEZ', words: ['Economic', 'Exclusion', 'Zone'] },
+    { acronym: 'CCG', words: ['Collectible', 'Card', 'Game'] },
+    { acronym: 'CDS', words: ['Credit', 'Default', 'Swap'] },
     { acronym: 'SKU', words: ['Stock', 'Keeping', 'Unit'] },
-    { acronym: 'CSPAN', words: ['Cable', 'Satellite', 'Public', 'Access','Network']},
+    { acronym: 'CSPAN', words: ['Cable', 'Satellite', 'Public', 'Access', 'Network'] },
     { acronym: 'FEMA', words: ['Federal', 'Emergency', 'Management', 'System'] },
     { acronym: 'SCOTUS', words: ['Supreme', 'Court', 'Of', 'The', 'United', 'States'] },
     { acronym: 'INTERPOL', words: ['International', 'Criminal', 'Police', 'Organization'] },
     { acronym: 'USB', words: ['Universal', 'Serial', 'Bus'] },
     { acronym: 'OCR', words: ['Optical', 'Character', 'Recognition'] },
-    { acronym: 'SSD', words: ['Solid', 'State', 'Drive']},
-    { acronym: 'TLD', words: ['Top', 'Level', 'Domain']},
-    { acronym: 'SVG', words: ['Scalable', 'Vector', 'Graphics']},
+    { acronym: 'SSD', words: ['Solid', 'State', 'Drive'] },
+    { acronym: 'TLD', words: ['Top', 'Level', 'Domain'] },
+    { acronym: 'SVG', words: ['Scalable', 'Vector', 'Graphics'] },
     { acronym: 'MIDI', words: ['Musical', 'Instrument', 'Digital', 'Interface'] },
     { acronym: 'DARPA', words: ['Defense', 'Advanced', 'Research', 'Projects', 'Agency'] },
     { acronym: 'BIOS', words: ['Basic', 'Input', 'Output', 'System'] },
@@ -113,7 +113,7 @@ export default function AcronynjaNinja() {
   const [gameStarted, setGameStarted] = useState(false)
   const [difficulty, setDifficulty] = useState(null)
   const [guessesLeft, setGuessesLeft] = useState(5)
-  const [currentAcronymObj, setCurrentAcronymObj] = useState(null) 
+  const [currentAcronymObj, setCurrentAcronymObj] = useState(null)
   //const [currentAcronym, setCurrentAcronym] = useState('')
   const [guess, setGuess] = useState([])
   const [showConfetti, setShowConfetti] = useState(false)
@@ -159,7 +159,7 @@ export default function AcronynjaNinja() {
     setCorrectGuesses(0)
     setIsTimed(selectedDifficulty === 'Timed')
     setTimeLeft(30)
-    
+
     if (selectedDifficulty === 'Timed') {
       nextAcronym()
     } else {
@@ -169,7 +169,7 @@ export default function AcronynjaNinja() {
 
   const getRandomAcronym = (difficulty) => {
     const difficulties = ['Easy', 'Medium', 'Hard'];
-    const selectedDifficulty = difficulty === 'Timed' 
+    const selectedDifficulty = difficulty === 'Timed'
       ? difficulties[Math.floor(Math.random() * difficulties.length)]
       : difficulty;
     return acronyms[selectedDifficulty][Math.floor(Math.random() * acronyms[selectedDifficulty].length)];
@@ -194,16 +194,19 @@ export default function AcronynjaNinja() {
   }
 
   const submitGuess = () => {
-    if (gameOver) return 
+    if (gameOver) return
 
-    const isCorrect = guess.every((word, index) => 
-      word.toLowerCase() === currentAcronymObj.words[index].toLowerCase()
-    )
+    const isCorrect = guess.length === currentAcronymObj.words.length &&
+      guess.every((word, index) =>
+        word && word.toLowerCase() === currentAcronymObj.words[index].toLowerCase()
+      );
 
-    const newFeedback = guess.map((word, index) => 
-      word.toLowerCase() === currentAcronymObj.words[index].toLowerCase() ? 'correct' : 'incorrect'
-    )
-    setFeedback(newFeedback)
+    const newFeedback = guess.map((word, index) => {
+      const guessWord = (word || "").toLowerCase();
+      const correctWord = (currentAcronymObj.words[index] || "").toLowerCase();
+      return guessWord === correctWord ? 'correct' : 'incorrect';
+    });
+    setFeedback(newFeedback);
 
     if (isCorrect) {
       if (isTimed) {
@@ -252,7 +255,11 @@ export default function AcronynjaNinja() {
     setGuessesLeft(guessesLeft - 1);
 
     // Check if the game is won after the hint
-    if (newGuess.every((word, index) => word.toLowerCase() === currentAcronymObj.words[index].toLowerCase())) {
+    if (newGuess.every((word, index) => {
+      const guessWord = (word || "").toLowerCase();
+      const correctWord = (currentAcronymObj.words[index] || "").toLowerCase();
+      return guessWord === correctWord;
+    })) {
       setShowConfetti(true);
       setGameWon(true);
       setGameOver(true);
@@ -260,11 +267,12 @@ export default function AcronynjaNinja() {
       // Game over if no guesses left after using the hint
       setGameOver(true);
     }
+
   }
 
   const showAnswer = () => {
-   setGuess(currentAcronymObj.words)
-   setGameOver(true)
+    setGuess(currentAcronymObj.words)
+    setGameOver(true)
   }
 
   return (
@@ -306,7 +314,7 @@ export default function AcronynjaNinja() {
 function StartScreen({ startGame }) {
   return (
     <div className="text-center">
-     <Analytics />
+      <Analytics />
       <motion.h1
         initial={{ y: -20 }}
         animate={{ y: 0 }}
@@ -324,13 +332,12 @@ function StartScreen({ startGame }) {
             key={level}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className={`px-6 py-3 rounded-full text-white font-semibold shadow-md ${
-              level === 'Easy'
+            className={`px-6 py-3 rounded-full text-white font-semibold shadow-md ${level === 'Easy'
                 ? 'bg-green-500 hover:bg-green-600'
                 : level === 'Medium'
-                ? 'bg-yellow-500 hover:bg-yellow-600'
-                : 'bg-red-500 hover:bg-red-600'
-            }`}
+                  ? 'bg-yellow-500 hover:bg-yellow-600'
+                  : 'bg-red-500 hover:bg-red-600'
+              }`}
             onClick={() => startGame(level)}
           >
             {level === 'Easy' ? <Target className="inline-block mr-2" /> : null}
@@ -382,7 +389,7 @@ function GameScreen({
     const message = `I just solved the acronym ${currentAcronymObj.acronym} in Acronynja! Want to test your skills? Play here: ${gameUrl}`;
     const encodedMessage = encodeURIComponent(message);
     const smsUrl = `sms:?&body=${encodedMessage}`;
-    
+
     window.open(smsUrl, '_blank');
     // Implement share functionality here
     // For now, we'll just log a message
@@ -404,10 +411,10 @@ function GameScreen({
         <div className="w-6" /> {/* Spacer for alignment */}
       </div>
       {!isTimed && (
-    <p className="text-xl font-semibold text-gray-800 mb-4">
-      Guesses left: <span className="text-purple-600">{guessesLeft}</span>
-    </p>
-  )}
+        <p className="text-xl font-semibold text-gray-800 mb-4">
+          Guesses left: <span className="text-purple-600">{guessesLeft}</span>
+        </p>
+      )}
       <p className="text-2xl font-bold text-gray-800 mb-6">
         The acronym is: <span className="text-purple-600">{currentAcronymObj.acronym}</span>
       </p>
@@ -438,17 +445,16 @@ function GameScreen({
               <span className="text-xl font-semibold text-purple-600">{currentAcronymObj.acronym[index]} =</span>
               <input
                 type="text"
-                value={guess[index]}
+                value={guess[index] || ""}
                 onChange={(e) => {
                   const newGuess = [...guess]
                   newGuess[index] = e.target.value
                   setGuess(newGuess)
                 }}
-                className={`border-2 rounded-md px-3 py-2 focus:outline-none ${
-                  feedback[index] === 'correct'
+                className={`border-2 rounded-md px-3 py-2 focus:outline-none ${feedback[index] === 'correct'
                     ? 'border-green-500 bg-green-100'
                     : 'border-purple-300 focus:border-purple-500'
-                }`}
+                  }`}
                 placeholder="Enter your guess"
                 disabled={gameOver || feedback[index] === 'correct'}
               />
@@ -467,33 +473,32 @@ function GameScreen({
             Submit Your Guess
           </motion.button>
         )}
-       {!gameOver && isTimed && (
-    <motion.button
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      className="w-full px-6 py-3 bg-yellow-500 text-white rounded-full font-semibold shadow-md hover:bg-yellow-600 transition duration-300"
-      onClick={skipAcronym}
-    >
-      Skip
-    </motion.button>
-  )}
-  {/* Ensure the Get a Hint button does not show when time is over */}
-  {!gameOver && !isTimed && (
-    <motion.button
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      className={`w-full px-6 py-3 text-white rounded-full font-semibold shadow-md transition duration-300 ${
-        gameOver || guessesLeft <= 1 || guessesLeft === 5
-          ? 'bg-gray-300 cursor-not-allowed'
-          : 'bg-blue-500 hover:bg-blue-600'
-      }`}
-      onClick={getHint}
-      disabled={gameOver || guessesLeft <= 1 || guessesLeft === 5}
-    >
-      Get a Hint
-    </motion.button>
-  )}
-           {gameOver && (
+        {!gameOver && isTimed && (
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="w-full px-6 py-3 bg-yellow-500 text-white rounded-full font-semibold shadow-md hover:bg-yellow-600 transition duration-300"
+            onClick={skipAcronym}
+          >
+            Skip
+          </motion.button>
+        )}
+        {/* Ensure the Get a Hint button does not show when time is over */}
+        {!gameOver && !isTimed && (
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className={`w-full px-6 py-3 text-white rounded-full font-semibold shadow-md transition duration-300 ${gameOver || guessesLeft <= 1 || guessesLeft === 5
+                ? 'bg-gray-300 cursor-not-allowed'
+                : 'bg-blue-500 hover:bg-blue-600'
+              }`}
+            onClick={getHint}
+            disabled={gameOver || guessesLeft <= 1 || guessesLeft === 5}
+          >
+            Get a Hint
+          </motion.button>
+        )}
+        {gameOver && (
           <>
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -523,7 +528,7 @@ function GameScreen({
             className="w-full px-6 py-3 bg-red-400 text-white rounded-full font-semibold shadow-md hover:bg-red-00 transition duration-300"
             onClick={showAnswer}
           >
-            Show Me the Answer 
+            Show Me the Answer
           </motion.button>
         )}
       </div>
